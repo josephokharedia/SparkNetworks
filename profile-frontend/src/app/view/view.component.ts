@@ -124,7 +124,7 @@ export class ViewComponent implements OnInit, OnDestroy {
       this.profile = profile;
       this.selectedCity = this.profile.city;
       this.resetWithProfileInfo();
-    }, (error) => this.errorRetrievingProfile = error);
+    }, (error) => this.errorRetrievingProfile = !!error);
     this.profileService.getAvatar(this.profileId)
       .pipe(takeUntil(this.destroy$), filter(base64 => !!base64))
       .subscribe(base64 => this.profilePicture = base64);
