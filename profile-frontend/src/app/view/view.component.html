@@ -1,4 +1,4 @@
-<main *ngIf="!errorRetrievingProfile; else noResults">
+<main *ngIf="profile">
   <header>
     <section class="avatar">
       <img alt="Click to change picture" *ngIf="!profilePicture"
@@ -162,7 +162,7 @@
     </form>
   </section>
 </main>
-<ng-template #noResults>
+<ng-container *ngIf="!profile && errorRetrievingProfile">
   <section class="noResults">
     <article class="container">
       <h1 class="mat-headline">Oops! No profile found</h1>
@@ -175,4 +175,4 @@
       </a>
     </article>
   </section>
-</ng-template>
+</ng-container>
