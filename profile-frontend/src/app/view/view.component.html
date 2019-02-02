@@ -1,4 +1,4 @@
-<main *ngIf="profile; else noResults">
+<main *ngIf="!errorRetrievingProfile; else noResults">
   <header>
     <section class="avatar">
       <img alt="Click to change picture" *ngIf="!profilePicture"
