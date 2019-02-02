@@ -1,0 +1,14 @@
+<header *ngIf="appError">
+  <section class="error">
+    <span *ngIf="appError.type === 'OFFLINE'">
+      <mat-icon color="primary">offline_bolt</mat-icon><span>{{appError.message}}</span>
+    </span>
+    <span *ngIf="appError.type === 'TECHNICAL'">
+      <mat-icon color="primary">error</mat-icon><span>{{appError.message}}</span>
+    </span>
+  </section>
+  <section class="dismiss">
+    <button mat-button color="primary" (click)="dismiss()">DISMISS</button>
+  </section>
+</header>
+<router-outlet></router-outlet>

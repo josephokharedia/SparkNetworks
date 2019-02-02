@@ -1,0 +1,9 @@
+CREATE TABLE SN_CITIES
+(
+  ID        BIGINT DEFAULT NEXTVAL('SQ_ID_GENERATOR') NOT NULL,
+  NAME      VARCHAR(255)                              NOT NULL,
+  VERSION    INT    DEFAULT 0,
+  LONGITUDE VARCHAR(255)                              NOT NULL,
+  LATITUDE  VARCHAR(255)                              NOT NULL,
+  CONSTRAINT PK_CITIES PRIMARY KEY (ID)
+);

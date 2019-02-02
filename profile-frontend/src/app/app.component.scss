@@ -1,0 +1,29 @@
+header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  max-height: 100px;
+  border-bottom: red solid 2px;
+  padding: 8px 24px;
+
+  section.error {
+    span {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      word-break: break-all;
+    }
+
+    flex: 70% 1 1;
+
+    mat-icon {
+      margin-right: 16px;
+    }
+  }
+
+  section.dismiss {
+    justify-content: end;
+  }
+}

@@ -1,0 +1,153 @@
+<main>
+  <section class="container" matTypography>
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-card class="registration-card">
+        <mat-card-header>
+          <img alt="" mat-card-avatar src="assets/no-photo.png"/>
+          <mat-card-title>REGISTRATION</mat-card-title>
+          <mat-card-subtitle>Spark Networks</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Display name" formControlName="displayName" maxlength="256">
+                <mat-error *ngIf="registerForm.controls['displayName'].hasError('required')">
+                  Display name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Real name" formControlName="realName" maxlength="256">
+                <mat-error *ngIf="registerForm.controls['realName'].hasError('required')">
+                  Real name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Birth date" formControlName="birthDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="registerForm.controls['birthDate'].hasError('required')">
+                  Birth date is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Ethnicity" formControlName="ethnicity">
+                  <mat-option *ngFor="let val of ethnicity$ | async" [value]="val">
+                    {{val.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput #height maxlength="5" placeholder="Height" type="number" step="any"
+                       formControlName="height">
+                <!--<mat-hint align="end">{{height.value.length}} / 5</mat-hint>-->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Religion" formControlName="religion">
+                  <mat-option *ngFor="let val of religion$ | async" [value]="val">
+                    {{val.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Marital Status" formControlName="maritalStatus">
+                  <mat-option *ngFor="let val of maritalStatus$ | async" [value]="val">
+                    {{val.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="registerForm.controls['maritalStatus'].hasError('required')">
+                  Marital status is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Occupation" formControlName="occupation" maxlength="256">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Figure" formControlName="figure">
+                  <mat-option *ngFor="let val of figure$ | async" [value]="val">
+                    {{val.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Gender" formControlName="gender">
+                  <mat-option *ngFor="let val of gender$ | async" [value]="val">
+                    {{val.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="registerForm.controls['gender'].hasError('required')">
+                  Gender is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <textarea matInput placeholder="About me" formControlName="aboutMe"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input type="text" placeholder="Location" matInput formControlName="city" [matAutocomplete]="auto"
+                       (blur)="validateCity($event)" maxlength="5000">
+                <mat-error *ngIf="registerForm.controls['city'].hasError('required')">
+                  Please select a <strong>valid</strong> city
+                </mat-error>
+              </mat-form-field>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let cityName of citySuggestions" [value]="cityName">{{cityName}}</mat-option>
+              </mat-autocomplete>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">SUBMIT</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </section>
+</main>

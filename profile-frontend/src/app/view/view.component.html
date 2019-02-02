@@ -1,0 +1,178 @@
+<main *ngIf="profile; else noResults">
+  <header>
+    <section class="avatar">
+      <img alt="Click to change picture" *ngIf="!profilePicture"
+           src="assets/no-photo.png" class="mat-elevation-z2"
+           matTooltip="Click to change picture"
+           (click)="fileInput.click()"/>
+      <img alt="Click to change picture" *ngIf="profilePicture"
+           [src]="'data:image/jpg;base64,'+profilePicture" class="mat-elevation-z2"
+           (click)="fileInput.click()"/>
+      <input hidden accept="text/csv" type="file" accept="image/*" #fileInput (change)="onFileChange($event)"/>
+      <h1 class="mat-headline">{{profile.realName}}</h1>
+      <h1 class="mat-subheading-2">{{profile.displayName}}</h1>
+      <!--<button mat-raised-button>CHANGE AVATAR</button>-->
+      <button *ngIf="!editMode" [disabled]="profileForm.invalid" color="accent" mat-raised-button (click)="onEdit()">
+        EDIT PROFILE
+      </button>
+      <section class="action" *ngIf="editMode">
+        <button mat-raised-button (click)="onCancel()">CANCEL</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid" (click)="onSubmit()">
+          SAVE
+        </button>
+      </section>
+    </section>
+  </header>
+  <section class="form">
+    <form (ngSubmit)="onSubmit()" [formGroup]="profileForm" novalidate>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input formControlName="displayName" matInput maxlength="256" placeholder="Display name">
+            <mat-error *ngIf="profileForm.controls['displayName'].hasError('required')">
+              Display name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input formControlName="realName" matInput maxlength="256" placeholder="Real name">
+            <mat-error *ngIf="profileForm.controls['realName'].hasError('required')">
+              Real name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input [matDatepicker]="picker" formControlName="birthDate" matInput placeholder="Birth date">
+            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="profileForm.controls['birthDate'].hasError('required')">
+              Birth date is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Ethnicity" formControlName="ethnicity" [compareWith]="compareById">
+              <mat-option *ngFor="let val of ethnicity$ | async" [value]="val">
+                {{val.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input #height formControlName="height" matInput maxlength="5" placeholder="Height"
+                   type="number">
+            <!--<mat-hint align="end">{{height.value.length}} / 5</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Religion" formControlName="religion" [compareWith]="compareById">
+              <mat-option *ngFor="let val of religion$ | async" [value]="val">
+                {{val.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Marital Status" formControlName="maritalStatus" [compareWith]="compareById">
+              <mat-option *ngFor="let val of maritalStatus$ | async" [value]="val">
+                {{val.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="profileForm.controls['maritalStatus'].hasError('required')">
+              Marital status is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input formControlName="occupation" matInput maxlength="256" placeholder="Occupation">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Figure" formControlName="figure" [compareWith]="compareById">
+              <mat-option *ngFor="let val of figure$ | async" [value]="val">
+                {{val.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Gender" formControlName="gender" [compareWith]="compareById">
+              <mat-option *ngFor="let val of gender$ | async" [value]="val">
+                {{val.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="profileForm.controls['gender'].hasError('required')">
+              Gender is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea formControlName="aboutMe" matInput placeholder="About me"
+                      cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="2"
+                      cdkAutosizeMaxRows="5"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="text" placeholder="Location" matInput formControlName="city" [matAutocomplete]="auto"
+                   (blur)="validateCity($event)" maxlength="5000">
+            <mat-error *ngIf="profileForm.controls['city'].hasError('required')">
+              Please select a <strong>valid</strong> city
+            </mat-error>
+          </mat-form-field>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let cityName of citySuggestions" [value]="cityName">{{cityName}}</mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+<ng-template #noResults>
+  <section class="noResults">
+    <article class="container">
+      <h1 class="mat-headline">Oops! No profile found</h1>
+      <img alt="" *ngIf="!profilePicture" src="assets/no-results.png"/>
+      <a routerLink="/create">
+        <button mat-raised-button color="primary">
+          <mat-icon>add</mat-icon>
+          PROFILE
+        </button>
+      </a>
+    </article>
+  </section>
+</ng-template>

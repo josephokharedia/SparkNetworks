@@ -1,0 +1,27 @@
+CREATE TABLE SN_PROFILE
+(
+  ID                     BIGINT DEFAULT NEXTVAL('SQ_ID_GENERATOR') NOT NULL,
+  VERSION                INT    DEFAULT 0,
+  CREATION_TIMESTAMP     TIMESTAMP WITH TIME ZONE                  NOT NULL,
+  MODIFICATION_TIMESTAMP TIMESTAMP WITH TIME ZONE                  NOT NULL,
+  DISPLAY_NAME           VARCHAR(256)                              NOT NULL,
+  REAL_NAME              VARCHAR(256)                              NOT NULL,
+  AVATAR                 BYTEA                                     NULL,
+  BIRTH_DATE             DATE                                      NOT NULL,
+  FK_GENDER              BIGINT                                    NOT NULL,
+  FK_ETHNICITY           BIGINT                                    NULL,
+  FK_RELIGION            BIGINT                                    NULL,
+  HEIGHT                 DECIMAL                                   NULL,
+  FK_FIGURE              BIGINT                                    NULL,
+  FK_MARITAL_STATUS      BIGINT                                    NOT NULL,
+  OCCUPATION             VARCHAR(256)                              NULL,
+  ABOUT_ME               VARCHAR(5000),
+  FK_CITY                BIGINT                                    NOT NULL,
+  CONSTRAINT PK_PROFILE PRIMARY KEY (ID),
+  FOREIGN KEY (FK_GENDER) REFERENCES SN_GENDER (ID),
+  FOREIGN KEY (FK_ETHNICITY) REFERENCES SN_ETHNICITY (ID),
+  FOREIGN KEY (FK_RELIGION) REFERENCES SN_RELIGION (ID),
+  FOREIGN KEY (FK_FIGURE) REFERENCES SN_FIGURE (ID),
+  FOREIGN KEY (FK_MARITAL_STATUS) REFERENCES SN_MARITAL_STATUS (ID),
+  FOREIGN KEY (FK_CITY) REFERENCES SN_CITIES (ID)
+);

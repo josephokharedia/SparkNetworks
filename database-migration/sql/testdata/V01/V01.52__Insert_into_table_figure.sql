@@ -1,0 +1,2 @@
+INSERT INTO SN_FIGURE(ID, NATURAL_ID, NAME)
+VALUES (-1,'1', 'Test figure');

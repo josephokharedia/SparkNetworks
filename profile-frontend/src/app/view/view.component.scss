@@ -1,0 +1,106 @@
+main {
+  display: flex;
+  flex-flow: column;
+
+  header {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.03);
+    height: 10%;
+
+    .avatar {
+      display: flex;
+      flex-direction: column;
+      margin: 40px auto 15px;
+
+      h1 {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+        margin-left: 50px;
+        margin-right: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 3px;
+        border: rgba(0, 0, 0, 0.5) 3px;
+      }
+
+      button {
+        margin-top: 20px;
+      }
+
+      section.action {
+        display: flex;
+        place-content: space-between;
+
+        button {
+          flex: 1
+        }
+
+        button:first-child {
+          margin-right: 24px;
+        }
+      }
+    }
+  }
+
+  .form {
+    min-width: 250px;
+    margin: 20px auto;
+    padding: 16px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field, button {
+  font-size: 16px;
+}
+
+.noResults {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+
+    & > * {
+      margin-bottom: 16px;
+    }
+
+    button {
+      width: 100%
+    }
+
+    img {
+      align-self: center;
+      width: 100px;
+      height: 100px;
+    }
+  }
+}

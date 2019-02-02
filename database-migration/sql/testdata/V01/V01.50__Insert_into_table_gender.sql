@@ -1,0 +1,2 @@
+INSERT INTO SN_GENDER(ID, NATURAL_ID, NAME)
+VALUES (-1, '1', 'Test gender');

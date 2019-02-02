@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-backend-deploy
+  labels:
+    app: profile-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile-backend
+  template:
+    metadata:
+      labels:
+        app: profile-backend
+    spec:
+      containers:
+      - name: profile-backend
+        image: ogatechnology/profile-backend:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 9000
