@@ -7,7 +7,7 @@ The database is a h2 file located in profile-backend/db folder <br/>
 To setup and install the database invoke maven command flyway:clean and flyway:migrate <br/>
 It is important to install the database and all it's preloaded data before running the backend module
 
-**profile-backend**: <br/>
+**profile-frontend**: <br/>
 This is the angular frontend application
 
 **profile-backend**: <br/>
